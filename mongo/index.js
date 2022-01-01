@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
-const uri = "mongodb://localhost:27017/cosonant";
+// const uri = "mongodb://localhost:27017/cosonant";
+const uri = "mongodb://minjae:password@mongo:27017/consonant?authSource=admin";
 const fs = require("fs");
 const path = require("path");
 const collections = fs.readdirSync(path.join(__dirname, "Schemas"));
