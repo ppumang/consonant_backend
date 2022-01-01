@@ -38,4 +38,25 @@ router.post("/upload_text", async (req, res) => {
     }
 })
 
+router.post("/upload_comment", async (req, res) => {
+    const { text, post_id } = req.body;
+    console.log({ text, post_id })
+    if (!text || !post_id) {
+        return res.json({ succeed: false });
+    }
+    try {
+        let userPost = await Post.findOne({ _id: post_id });
+        if (!userPost.comments) {
+            userPost.comments = [text];
+        } else {
+            userPost.comments.push(text);
+        }
+        await userPost.save();
+        return res.json({ succeed: true })
+    } catch (e) {
+        console.log({ e });
+        return res.json({ succeed: false })
+    }
+})
+
 module.exports = router;
